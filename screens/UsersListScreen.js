@@ -1,21 +1,29 @@
-import React, { useState } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import userService from "../api/userService";
 
 const UsersListScreen = ({ navigation }) => {
+  const [users, setUsers] = useState([]);
+
   const getUsers = async () => {
     const users = await userService.getUsers();
+    setUsers(users);
   };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <FlatList>
-        data = {users}
-        keyExtractor={(user) => user.id.toString()}
-        renderItem=
-        {({ item }) => {
-          return <Item user={item} navigation={navigation} />;
-        }}
-      </FlatList>
+      <Text>Utilisateurs :</Text>
+      <Text>{users}</Text>
     </View>
   );
 };
