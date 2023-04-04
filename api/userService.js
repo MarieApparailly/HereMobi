@@ -3,37 +3,48 @@ const rootEndpoint = "https://piimarieapparailly.azurewebsites.net/api/UserApi";
 // Model class for a user
 export class User {
   constructor(
-    //id,
-    pseudo
-    // password,
-    // firstName,
-    // lastName,
-    // phone,
-    // mail,
-    // photo,
-    // car,
-    // status
+    id,
+    latitude,
+    longitude,
+    placeId,
+    place,
+    pseudo,
+    password,
+    firstName,
+    lastName,
+    phone,
+    mail,
+    photo,
+    car,
+    status,
+    team,
+    admin, 
+    missions
   ) {
-    //this.id = id;
-    // ajouter variables si carte fonctionne !!!
+    this.id = id;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.placeId = placeId;
+    this.place = place;
     this.pseudo = pseudo;
-    // this.password = password;
-    // this.firstName = firstName;
-    // this.lastName = lastName;
-    // this.phone = phone;
-    // this.mail = mail;
-    // this.photo = photo;
-    // this.car = car;
-    // this.status = status;
-    // this.team = team;
-    // this.admin = admin;
-    // this.missions = missions;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.phone = phone;
+    this.mail = mail;
+    this.photo = photo;
+    this.car = car;
+    this.status = status;
+    this.team = team;
+    this.admin = admin;
+    this.missions = missions;
   }
 }
 
 class UserService {
   async getUsers() {
     const users = await this.fetchFromApi(`${rootEndpoint}`);
+    console.log(users);
     return this.createListUsers(users);
   }
 
@@ -43,6 +54,9 @@ class UserService {
       const response = await fetch(query);
       // FIXME: JSON parse error when users not found
       const content = await response.json();
+      console.log(content);
+      //ici rentrer le tableau dans un objet
+      //return content;  
       return content.users;
     } catch (e) {
       console.error(e);
@@ -52,19 +66,23 @@ class UserService {
   // Create a User model object from a subset of data fields returned by API
   createUser(user) {
     return new User(
-      //user.idUser,
-      user.pseudoUser
-      // user.passwordUser,
-      // user.firstNameUser,
-      // user.lastNameUser,
-      // user.phoneUser,
-      // user.mailUser,
-      // user.photoUser,
-      // user.carUser,
-      // user.statusUser,
-      // user.teamUser,
-      // user.adminUser,
-      // user.missionsUser
+      user.id,
+      user.latitude,
+      user.longitude,
+      user.placeId,
+      user.place,
+      user.pseudo,
+      user.password,
+      user.firstName,
+      user.lastName,
+      user.phone,
+      user.mail,
+      user.photo,
+      user.car,
+      user.status,
+      user.team,
+      user.admin,
+      user.missions
     );
   }
 
