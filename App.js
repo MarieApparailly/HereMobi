@@ -1,5 +1,8 @@
 import RootTabNavigator from "./navigation/RootTabNavigator";
 
 export default App = () => {
+  console.log(
+    "////////////////////////////////////////////////////////// \n NEW TEST \n /////////////////////////////////////////////////////////////"
+  );
   return <RootTabNavigator />;
 };

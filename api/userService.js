@@ -1,4 +1,4 @@
-const rootEndpoint = "https://piimarieapparailly.azurewebsites.net/api/UserApi";
+const rootEndpoint = "https://piimarieapparailly.azurewebsites.net/api";
 
 // Model class for a user
 export class User {
@@ -18,7 +18,7 @@ export class User {
     car,
     status,
     team,
-    admin, 
+    admin,
     missions
   ) {
     this.id = id;
@@ -43,53 +43,53 @@ export class User {
 
 class UserService {
   async getUsers() {
-    const users = await this.fetchFromApi(`${rootEndpoint}`);
-    console.log(users);
-    return this.createListUsers(users);
+    const response = await fetch(`${rootEndpoint}/UserApi`);
+    const users = await response.json();
+    return users;
   }
 
-  async fetchFromApi(query) {
-    console.log(`Fetching API with query ${query}`);
-    try {
-      const response = await fetch(query);
-      // FIXME: JSON parse error when users not found
-      const content = await response.json();
-      console.log(content);
-      //ici rentrer le tableau dans un objet
-      //return content;  
-      return content.users;
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // async fetchFromApi(query) {
+  //   console.log(`Fetching API with query ${query}`);
+  //   try {
+  //     const response = await fetch(query);
+  //     // FIXME: JSON parse error when users not found
+  //     const content = await response.json();
+  //     console.log(content);
+  //     //ici rentrer le tableau dans un objet
+  //     //return content;
+  //     return content.users;
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
-  // Create a User model object from a subset of data fields returned by API
-  createUser(user) {
-    return new User(
-      user.id,
-      user.latitude,
-      user.longitude,
-      user.placeId,
-      user.place,
-      user.pseudo,
-      user.password,
-      user.firstName,
-      user.lastName,
-      user.phone,
-      user.mail,
-      user.photo,
-      user.car,
-      user.status,
-      user.team,
-      user.admin,
-      user.missions
-    );
-  }
+  // // Create a User model object from a subset of data fields returned by API
+  // createUser(user) {
+  //   return new User(
+  //     user.id,
+  //     user.latitude,
+  //     user.longitude,
+  //     user.placeId,
+  //     user.place,
+  //     user.pseudo,
+  //     user.password,
+  //     user.firstName,
+  //     user.lastName,
+  //     user.phone,
+  //     user.mail,
+  //     user.photo,
+  //     user.car,
+  //     user.status,
+  //     user.team,
+  //     user.admin,
+  //     user.missions
+  //   );
+  // }
 
-  createListUsers(users) {
-    // Create a user object for each element in the array
-    return users.map((user) => this.createUser(user));
-  }
+  // createListUsers(users) {
+  //   // Create a user object for each element in the array
+  //   return users.map((user) => this.createUser(user));
+  // }
 }
 
 export default new UserService();
