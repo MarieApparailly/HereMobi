@@ -35,7 +35,7 @@ const UsersListScreen = ({ navigation }) => {
       const usersLoaded = await userService.getUsers();
       setUsersApi(usersLoaded);
       console.log("api");
-      console.log(usersApi);
+      console.log(usersLoaded);
       console.log("fin api");
     } catch (e) {
       setError(true);

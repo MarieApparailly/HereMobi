@@ -16,8 +16,8 @@ const RootTabNavigator = () => {
           // Icons will be different if the tab is focused
           tabBarIcon: ({ focused, color, size }) => {
             const icons = {
-              UserStack: "ios-wine",
-              //IngredientStack: "ios-menu",
+              UserStack: "ios-list-outline",
+              UserMapStack: "ios-map-outline",
             };
             return (
               <Ionicons
@@ -34,7 +34,7 @@ const RootTabNavigator = () => {
         <Tab.Screen
           name="UserStack"
           component={UserStackNavigator}
-          options={{ title: "Users" }}
+          options={{ title: "UserStack" }}
         />
         {/* <Tab.Screen
           name="IngredientStack"
